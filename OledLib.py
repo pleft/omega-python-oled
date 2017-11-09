@@ -1,8 +1,7 @@
 from OmegaExpansion import oledExp
 
-oledExp.setImageColumns()
-
 oledExp.driverInit()
+oledExp.setImageColumns()
 oledExp.setMemoryMode(0)
 
 rowSize=8
@@ -34,4 +33,3 @@ def blit():
 			count += rowSize
 		page += 1
 	return
-blit()
