@@ -33,18 +33,5 @@ def blit():
 			oledExp.writeByte(byte)
 			count += rowSize
 		page += 1
-	end = int(round(time.time() * 1000))	
 	return
-
-# for i in range(width):
-# 	putPixel(i, 0)
-# 	putPixel(i, height -1)
-# for j in range(height):
-# 	putPixel(0, j)
-# 	putPixel(width - 1, j)
-
-for i in range(width):
-	for j in range(height):
-		putPixel(i, j)
-
 blit()
