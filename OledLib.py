@@ -72,7 +72,7 @@ def blit2():
 def blit3():                                  
         start = int(round(time.time() * 1000))
         global compactbuffer      
-	    global pagebuffer               
+	global pagebuffer               
         page = 0                              
         while page < rows:                  
                 count = 0                                 
@@ -87,6 +87,6 @@ def blit3():
         #after blitting to screen, clear the pagebuffer                    
         pagebuffer=[[0 for i in range(width*rowSize)] for j in range(rows)]
         compactbuffer=[[0 for i in range(width)] for j in range(rows)]
-	    end = int(round(time.time() * 1000))                               
+	end = int(round(time.time() * 1000))                               
         print("blit3() took: " + str(end-start) )                          
         return
