@@ -37,6 +37,23 @@ def putPixel(x, y):
 		byte = (byte << 1) | pagebuffer[(y/rowSize)%rows][x*rowSize+j]
 	compactbuffer[(y/rowSize)%rows][x] = byte
 
+def putRectangle(x, y, width, height, fill):
+	""" puts a rectangle (width x height) at the specified x, y coordinates.
+	Setting 'fill' to True will fill the rectangle, 
+	where False will draw just the borders """
+
+	if fill:
+		for i in range(width):
+			for j in range(height):
+				putPixel(x + i, y + j)
+	else :
+		for i in range(width):
+			putPixel(x + i, y)
+			putPixel(x + i, y + height)
+		for j in range(height):
+			putPixel(x, y + j)
+			putPixel(x + width, y + j)
+
 def putBitmap(x, y, bitmap):
 	""" puts a bitmap MxN array of 0s and 1s to x, y coordinates """
 	height = len(bitmap)
