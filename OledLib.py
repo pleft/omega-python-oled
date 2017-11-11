@@ -20,14 +20,14 @@ height=rowSize*rows
 pagebuffer=[[0 for i in range(width*rowSize)] for j in range(rows)]
 compactbuffer=[[0 for i in range(width)] for j in range(rows)]
 
+def bin(s):
+    return str(s) if s<=1 else bin(s>>1) + str(s&1)
+
 def clearBuffers():
 	""" clear the framebuffers (all elements to 0) """
 	global pagebuffer, compactbuffer
 	pagebuffer=[[0 for i in range(width*rowSize)] for j in range(rows)]
 	compactbuffer=[[0 for i in range(width)] for j in range(rows)]
-
-def bin(s):
-    return str(s) if s<=1 else bin(s>>1) + str(s&1)
 
 def putPixel(x, y):
 	""" puts a pixel to x, y coordinates """
@@ -49,8 +49,7 @@ def putBitmap(x, y, bitmap):
 def blit():
 	""" Blits the framebuffer to screen at maximum fast rate """
 	# start = int(round(time.time() * 1000))
-        global compactbuffer
-	global pagebuffer
+        global compactbuffer, pagebuffer
         page = 0
         while page < rows:
                 count = 0
