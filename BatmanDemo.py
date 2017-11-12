@@ -43,6 +43,8 @@ batman = [
 [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
 ]
 
+OledLib.init()
+
 start = int(round(time.time() * 1000))
 # bitmap blitting example at random positions
 oledExp.clear()

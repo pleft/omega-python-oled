@@ -14,6 +14,8 @@ bitmap = [
     [[1 for i in range(1)] for j in range(1)]
     ]
 
+OledLib.init()
+
 for i in range(len(bitmap)):
     translated = OledLib.translateBitmap(bitmap[i])
     oledExp.clear()

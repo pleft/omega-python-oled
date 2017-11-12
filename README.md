@@ -46,7 +46,8 @@ A `DMA` performance test against `bitmap` size and `FPS` count is included in [P
 
 
 ## API
-- `clearBuffers`: Clears the framebuffer (all elements to `0`).
+- `init()`: Initializes the screen, must be called when starting using OledLib
+- `clearBuffers()`: Clears the framebuffer (all elements to `0`).
 - `putPixel(x, y, value)`: Puts the `value` (`0` or `1`) at `x`, `y` coordinates.
 - `putRectangle(x, y, width, height, fill)`: Puts a rectangle (`width` x `height`) at the specified `x`, `y` coordinates. Setting `fill` to `True` will fill the rectangle, where `False` will draw just the borders.
 - `putBitmap(x, y, bitmap)`: Puts a `bitmap` MxN array of `0`s and `1`s to `x`, `y` coordinates.

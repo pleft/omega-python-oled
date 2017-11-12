@@ -44,6 +44,8 @@ batman = [
 
 ]
 
+OledLib.init()
+
 translatedBatman = OledLib.translateBitmap(batman)
 
 # bitmap blitting example at random positions

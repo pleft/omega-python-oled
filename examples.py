@@ -2,6 +2,7 @@ from OmegaExpansion import oledExp
 import OledLib
 import time
 
+OledLib.init()
 
 #Example 1, fill the whole screen with pixels
 for i in range(0, OledLib.OLED_WIDTH, 1):

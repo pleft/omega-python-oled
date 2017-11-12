@@ -13,17 +13,19 @@ OLED_HEIGHT = OLED_PAGE_SIZE * OLED_PAGES
 
 i2c = onionI2C.OnionI2C()
 
-oledExp.driverInit()
-oledExp.setImageColumns()
-oledExp.setMemoryMode(0)
-
 # pagebuffer 128x8 holding bytes
 pagebuffer = [[0 for i in range(OLED_WIDTH)] for j in range(OLED_PAGES)]
-
 
 def bin(s):
     return str(s) if s <= 1 else bin(s >> 1) + str(s & 1)
 
+def init():
+    """
+        Initializes the screen, must be called when starting using OledLib
+    """
+    oledExp.driverInit()
+    oledExp.setImageColumns()
+    oledExp.setMemoryMode(0)
 
 def clearBuffers():
     """
@@ -74,7 +76,6 @@ def blit():
         Renders the whole `framebuffer` to screen at maximum fast rate.
     """
     # start = int(round(time.time() * 1000))
-    global pagebuffer
     page = 0
     while page < OLED_PAGES:
         count = 0
@@ -95,12 +96,11 @@ def pageBlit(pageNo, x, length):
         Renders portion of a page, (row) with `length` starting from `x`, to screen at maximum fast rate. Does not clear the `framebuffer` after.
     """
     start = int(round(time.time() * 1000))
-    oledExp.setCursorByPixel(pageNo, x)
-    global pagebuffer
     count = 0
     while count < length:
         lineWidth = length if length < OLED_I2C_MAX_BUFFER else (
             OLED_I2C_MAX_BUFFER if length - count > OLED_I2C_MAX_BUFFER else length - count)
+        lineWidth = lineWidth if lineWidth != 23 else 24 #segmentation fault when 23
         bytes = [pagebuffer[pageNo][x + count + i]
                  for i in range(lineWidth)]
         i2c.writeBytes(OLED_EXP_ADDR, OLED_EXP_REG_DATA, bytes)
@@ -120,15 +120,15 @@ def bitmapBlit(x, y, translatedBitmap):
     bitmapPage = 0 
     bufferPage = (y / OLED_PAGE_SIZE) % OLED_PAGES
     # print("Bitmap height: " + str(bitmapHeight))
-    while bitmapPage < bitmapHeight:
+    while bitmapPage < bitmapHeight and bufferPage+bitmapPage < OLED_PAGES:
         # print("Bitmap page: " + str(bitmapPage))
         oledExp.setCursorByPixel(bufferPage+bitmapPage, x)
-        # bitmapWidth = bitmapWidth if OLED_WIDTH > bitmapWidth + x else OLED_WIDTH - x
+        bitmapWidth = bitmapWidth if OLED_WIDTH > bitmapWidth + x else OLED_WIDTH - x
         count = 0
         while count < bitmapWidth:
             lineWidth = bitmapWidth if bitmapWidth < OLED_I2C_MAX_BUFFER else (
                 OLED_I2C_MAX_BUFFER if bitmapWidth - count > OLED_I2C_MAX_BUFFER else bitmapWidth - count)
-            # lineWidth = lineWidth if lineWidth != 23 else 22 #segmentation fault when 23
+            lineWidth = lineWidth if lineWidth != 23 else 24 #segmentation fault when 23
             # print(lineWidth)
             # print(translatedBitmap[bitmapPage])
             # print(count)
