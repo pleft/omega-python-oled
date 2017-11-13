@@ -1,7 +1,5 @@
 import OledLib
-from OmegaExpansion import oledExp
 from random import randint
-import time
 
 batman = [
 [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
@@ -41,80 +39,22 @@ batman = [
 [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
 [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
 [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+
 ]
 
-# bitmap blitting example at random positions
-oledExp.clear()
-oledExp.write("Bitmap blitting")
-time.sleep(2)
-oledExp.clear()
-for i in range(10):
-	OledLib.putBitmap(randint(0, 60), randint(8, 20), batman)
-	OledLib.blit()
-time.sleep(1)
+translatedBatman = OledLib.translateBitmap(batman)
+OledLib.bitmapBlit(24, 0, translatedBatman)
+# OledLib.putBitmap(24,0, batman)
+# OledLib.blit()
 
-# scalling example (zooming in, both axes scale)
-oledExp.clear()
-oledExp.write("Scalling: zoom in")
-time.sleep(2)
-for scale in range(8, 0, -1):
-	scaledBatman = OledLib.scaleBitmap(batman, scale, scale)
-	h = len(scaledBatman)
-	w = len(scaledBatman[0])
-	OledLib.putBitmap(64-w/2, 32-h/2, scaledBatman)
-	OledLib.blit()
-time.sleep(1)
+# OledLib.putBitmap(24,0, batman)
+# OledLib.pageBlit(0, 24, 64)
+# OledLib.pageBlit(1, 24, 64)
+# OledLib.pageBlit(2, 24, 64)
+# OledLib.pageBlit(3, 24, 64)
+# OledLib.pageBlit(3,10)
+# OledLib.pageBlit(4,10)
 
-# rotate bitmap 90, 180, 270, 360 degrees
-oledExp.clear()
-oledExp.write("Rotation: 90, 180, 270 degrees")
-time.sleep(2)
-oledExp.clear()
-rotatedBatman = OledLib.rotateBitmap90(batman)
-h = len(rotatedBatman)
-w = len(rotatedBatman[0])
-OledLib.putBitmap(64-w/2, 32-h/2, rotatedBatman)
-OledLib.blit()
-
-rotatedBatman = OledLib.rotateBitmap180(batman)
-h = len(rotatedBatman)
-w = len(rotatedBatman[0])
-OledLib.putBitmap(64-w/2, 32-h/2, rotatedBatman)
-OledLib.blit()
-
-rotatedBatman = OledLib.rotateBitmap270(batman)
-h = len(rotatedBatman)
-w = len(rotatedBatman[0])
-OledLib.putBitmap(64-w/2, 32-h/2, rotatedBatman)
-OledLib.blit()
-
-h = len(batman)
-w = len(batman[0])
-OledLib.putBitmap(64-w/2, 32-h/2, batman)
-OledLib.blit()
-time.sleep(1)
-
-# scalling example (x-axis only)
-oledExp.clear()
-oledExp.write("Scalling: x-axis")
-time.sleep(2)
-oledExp.clear()
-scale = 1
-while scale<=8:
-	scaledBatman = OledLib.scaleBitmap(batman, scale, 1)
-	h = len(scaledBatman)
-	w = len(scaledBatman[0])
-	OledLib.putBitmap(64-w/2, 32-h/2, scaledBatman)
-	OledLib.blit()
-	scale += 1
-
-scale = 8
-while scale>0:
-	scaledBatman = OledLib.scaleBitmap(batman, scale, 1)
-	h = len(scaledBatman)
-	w = len(scaledBatman[0])
-	OledLib.putBitmap(64-w/2, 32-h/2, scaledBatman)
-	OledLib.blit()
-	scale -= 1
-time.sleep(1)
-oledExp.write("Enjoy OledLib!")
+# for i in range(30):
+# 	OledLib.dma(randint(0, 60), randint(0, 10), batman)
+	# OledLib.blit()
