@@ -26,22 +26,25 @@ def bin(s):
 
 
 def clearBuffers():
-    """ clear the framebuffers (all elements to 0) """
+    """
+        Clears the framebuffers (all elements to 0).
+    """
     global pagebuffer
     pagebuffer = [[0 for i in range(OLED_WIDTH)] for j in range(OLED_PAGES)]
 
 
 def putPixel(x, y, value):
-    """ Puts the `value` (0 or 1) at `x`, `y` coordinates """
+    """
+        Puts the `value` (0 or 1) at `x`, `y` coordinates.
+    """
     global pagebuffer
     byte = (value << (y% OLED_PAGE_SIZE))
     pagebuffer[(y / OLED_PAGE_SIZE) % OLED_PAGES][x] |= byte
 
 def putRectangle(x, y, width, height, fill):
     """ 
-        Puts a rectangle (`width` x `height`) at the specified `x`, `y` coordinates. Setting `fill` to `True` will fill the rectangle, where `False` will draw just the borders
+        Puts a rectangle (`width` x `height`) at the specified `x`, `y` coordinates. Setting `fill` to `True` will fill the rectangle, where `False` will draw just the borders.
     """
-
     if fill:
         for i in range(width):
             for j in range(height):
@@ -56,7 +59,9 @@ def putRectangle(x, y, width, height, fill):
 
 
 def putBitmap(x, y, bitmap):
-    """ Puts a `bitmap` MxN array of 0s and 1s to `x`, `y` coordinates """
+    """
+        Puts a `bitmap` MxN array of 0s and 1s to `x`, `y` coordinates.
+    """
     height = len(bitmap)
     width = len(bitmap[0])
     for i in range(width):
@@ -65,7 +70,9 @@ def putBitmap(x, y, bitmap):
 
 
 def blit():
-    """ Renders the whole `framebuffer` to screen at maximum fast rate """
+    """
+        Renders the whole `framebuffer` to screen at maximum fast rate.
+    """
     start = int(round(time.time() * 1000))
     global pagebuffer
     page = 0
@@ -146,7 +153,7 @@ def translateBitmap(bitmap):
 
 def scaleBitmap(bitmap, scaleX, scaleY):
     """
-        Scales down the given `bitmap`. Each axis can scale differently by setting `scaleX`, `scaleY`. Positive integer values only
+        Scales down the given `bitmap`. Each axis can scale differently by setting `scaleX`, `scaleY`. Positive integer values only.
     """
     width = len(bitmap[0])
     height = len(bitmap)
@@ -154,7 +161,7 @@ def scaleBitmap(bitmap, scaleX, scaleY):
 
 def rotateBitmap90(bitmap):
     """
-        Rotates the `bitmap` 90 degrees
+        Rotates the `bitmap` 90 degrees.
     """
     width = len(bitmap[0])
     height = len(bitmap)
@@ -166,7 +173,7 @@ def rotateBitmap90(bitmap):
 
 def rotateBitmap180(bitmap):
     """
-        Rotates the `bitmap` 180 degrees
+        Rotates the `bitmap` 180 degrees.
     """
     width = len(bitmap[0])
     height = len(bitmap)
@@ -178,7 +185,7 @@ def rotateBitmap180(bitmap):
 
 def rotateBitmap270(bitmap):
     """
-        Rotates the `bitmap` 270 degrees
+        Rotates the `bitmap` 270 degrees.
     """
     width = len(bitmap[0])
     height = len(bitmap)
