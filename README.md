@@ -23,7 +23,7 @@ Python modules to be installed on the Onion Omega IoT device.
 ## Demonstration
 Below is a video showcasing most features of the `OledLib` library.
 
-[![IMAGE ALT TEXT](http://img.youtube.com/vi/tv8f6IBPjpM/0.jpg)](https://www.youtube.com/watch?v=tv8f6IBPjpM "Video Title")
+[![IMAGE ALT TEXT](http://img.youtube.com/vi/tv8f6IBPjpM/0.jpg)](https://www.youtube.com/watch?v=tv8f6IBPjpM "OledLib Graphics Library Demonstration")
 
 ## API
 - `clearBuffers`: Clears the framebuffer (all elements to `0`).
