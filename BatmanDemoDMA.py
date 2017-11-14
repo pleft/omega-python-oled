@@ -1,5 +1,7 @@
 import OledLib
+from OmegaExpansion import oledExp
 from random import randint
+import time
 
 batman = [
 [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
@@ -42,19 +44,52 @@ batman = [
 
 ]
 
+batman2 = [
+[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+[1,1,1,1,1,1,0,0,1,1,1,1,1,1,1,1,1,1,0,0,1,1,1,1,1,1],
+[1,1,1,1,0,0,0,1,1,1,1,1,0,0,1,1,1,1,1,0,0,0,1,1,1,1],
+[1,1,0,0,0,0,0,1,1,1,1,0,0,0,0,1,1,1,1,0,0,0,0,0,1,1],
+[1,0,0,0,0,0,0,0,1,1,1,0,0,0,0,1,1,1,0,0,0,0,0,0,0,1],
+[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+[1,0,0,0,0,1,1,0,0,0,1,0,0,0,0,1,0,0,0,1,1,0,0,0,0,1],
+[1,1,0,0,1,1,1,1,1,1,1,1,0,0,1,1,1,1,1,1,1,1,0,0,1,1],
+[1,1,1,0,0,1,1,1,1,1,1,1,0,0,1,1,1,1,1,1,1,0,0,1,1,1],
+[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+]
+
 translatedBatman = OledLib.translateBitmap(batman)
-OledLib.bitmapBlit(24, 0, translatedBatman)
-# OledLib.putBitmap(24,0, batman)
-# OledLib.blit()
 
-# OledLib.putBitmap(24,0, batman)
-# OledLib.pageBlit(0, 24, 64)
-# OledLib.pageBlit(1, 24, 64)
-# OledLib.pageBlit(2, 24, 64)
-# OledLib.pageBlit(3, 24, 64)
-# OledLib.pageBlit(3,10)
-# OledLib.pageBlit(4,10)
+# bitmap blitting example at random positions
+oledExp.clear()
+oledExp.write("Bitmap bliting size: " + str(len(batman[0])) + "x" + str(len(batman)))
+time.sleep(2)
+oledExp.clear()
+frames = 0
+exampleStart = int(round(time.time() * 1000))
+for i in range(120):
+	OledLib.bitmapBlit(randint(0, 60), randint(0, 20), translatedBatman)
+	frames += 1
+exampleEnd = int(round(time.time() * 1000))
+millis = exampleEnd - exampleStart
+print("Random bitmapBlit took: " + str(millis) + " milliseconds") 
+print("Total Frames: " + str(frames))
+print("FPS: " + str(frames*1000/float(millis)))
 
-# for i in range(30):
-# 	OledLib.dma(randint(0, 60), randint(0, 10), batman)
-	# OledLib.blit()
+translatedBatman2 = OledLib.translateBitmap(batman2)
+oledExp.clear()
+oledExp.write("Bitmap bliting size: " + str(len(batman2[0])) + "x" + str(len(batman2)))
+time.sleep(2)
+oledExp.clear()
+frames = 0
+exampleStart = int(round(time.time() * 1000))
+for i in range(120):
+	OledLib.bitmapBlit(randint(0, 100), randint(0, 50), translatedBatman2)
+	frames += 1
+exampleEnd = int(round(time.time() * 1000))
+millis = exampleEnd - exampleStart
+print("Random bitmapBlit took: " + str(millis) + " milliseconds") 
+print("Total Frames: " + str(frames))
+print("FPS: " + str(frames*1000/float(millis)))

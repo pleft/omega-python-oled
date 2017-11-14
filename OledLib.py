@@ -73,7 +73,7 @@ def blit():
     """
         Renders the whole `framebuffer` to screen at maximum fast rate.
     """
-    start = int(round(time.time() * 1000))
+    # start = int(round(time.time() * 1000))
     global pagebuffer
     page = 0
     while page < OLED_PAGES:
@@ -86,8 +86,8 @@ def blit():
         page += 1
     # after blitting to screen, clear the pagebuffer
     clearBuffers()
-    end = int(round(time.time() * 1000))
-    print("blit() took: " + str(end - start))
+    # end = int(round(time.time() * 1000))
+    # print("blit() took: " + str(end - start))
 
 
 def pageBlit(pageNo, x, length):
@@ -114,7 +114,7 @@ def bitmapBlit(x, y, translatedBitmap):
     """
         Instead of filling the whole 128x64 framebuffer it renders only the region of a `translatedBitmap` on the screen at `x`, `y` location, sort of Direct Memory Access (DMA). Requires the `translatedBitmap` from `translateBitmap()` as input. Does not clear the `framebuffer` after.
     """
-    start = int(round(time.time() * 1000))
+    # start = int(round(time.time() * 1000))
     bitmapHeight = len(translatedBitmap)
     bitmapWidth = len(translatedBitmap[0])
     bitmapPage = 0 
@@ -132,8 +132,8 @@ def bitmapBlit(x, y, translatedBitmap):
             count += lineWidth
         oledExp.setCursorByPixel(0, 0)
         bitmapPage += 1
-    end = int(round(time.time() * 1000))
-    print("bitmapBlit() took: " + str(end - start))
+    # end = int(round(time.time() * 1000))
+    # print("bitmapBlit() took: " + str(end - start))
 
 def translateBitmap(bitmap):
     """
