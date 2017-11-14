@@ -4,9 +4,9 @@ import time
 
 
 #Example 1, fill the whole screen with pixels
-for i in range(0, OledLib.width, 1):
-	for j in range(0, OledLib.height, 1):
-		OledLib.putPixel(i, j)
+for i in range(0, OledLib.OLED_WIDTH, 1):
+	for j in range(0, OledLib.OLED_HEIGHT, 1):
+		OledLib.putPixel(i, j, 1)
 OledLib.blit()
 
 #wait 2 secs
@@ -14,12 +14,12 @@ time.sleep(2)
 oledExp.clear()
 
 #Example 2, draw screen borders
-for i in range(OledLib.width):
-	OledLib.putPixel(i, 0)
-	OledLib.putPixel(i, OledLib.height-1)
-for j in range(OledLib.height):
-	OledLib.putPixel(0, j)
-	OledLib.putPixel(OledLib.width-1, j)
+for i in range(OledLib.OLED_WIDTH):
+	OledLib.putPixel(i, 0, 	1)
+	OledLib.putPixel(i, OledLib.OLED_HEIGHT-1, 1)
+for j in range(OledLib.OLED_HEIGHT):
+	OledLib.putPixel(0, j, 1)
+	OledLib.putPixel(OledLib.OLED_WIDTH-1, j, 1)
 OledLib.blit()
 
 #wait 2secs
