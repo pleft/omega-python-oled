@@ -45,7 +45,7 @@ batman = [
 
 # bitmap blitting example at random positions
 oledExp.clear()
-oledExp.write("Bitmap blitting")
+oledExp.write("Bitmap bliting")
 time.sleep(2)
 oledExp.clear()
 for i in range(10):
@@ -55,7 +55,7 @@ time.sleep(1)
 
 # scalling example (zooming in, both axes scale)
 oledExp.clear()
-oledExp.write("Scalling: zoom in")
+oledExp.write("Scaling: zoom in")
 time.sleep(2)
 for scale in range(8, 0, -1):
 	scaledBatman = OledLib.scaleBitmap(batman, scale, scale)
@@ -96,7 +96,7 @@ time.sleep(1)
 
 # scalling example (x-axis only)
 oledExp.clear()
-oledExp.write("Scalling: x-axis")
+oledExp.write("Scaling: x-axis")
 time.sleep(2)
 oledExp.clear()
 scale = 1
@@ -111,6 +111,30 @@ while scale<=8:
 scale = 8
 while scale>0:
 	scaledBatman = OledLib.scaleBitmap(batman, scale, 1)
+	h = len(scaledBatman)
+	w = len(scaledBatman[0])
+	OledLib.putBitmap(64-w/2, 32-h/2, scaledBatman)
+	OledLib.blit()
+	scale -= 1
+time.sleep(1)
+
+# scalling example (y-axis only)
+oledExp.clear()
+oledExp.write("Scaling: y-axis")
+time.sleep(2)
+oledExp.clear()
+scale = 1
+while scale<=8:
+	scaledBatman = OledLib.scaleBitmap(batman, 1, scale)
+	h = len(scaledBatman)
+	w = len(scaledBatman[0])
+	OledLib.putBitmap(64-w/2, 32-h/2, scaledBatman)
+	OledLib.blit()
+	scale += 1
+
+scale = 8
+while scale>0:
+	scaledBatman = OledLib.scaleBitmap(batman, 1, scale)
 	h = len(scaledBatman)
 	w = len(scaledBatman[0])
 	OledLib.putBitmap(64-w/2, 32-h/2, scaledBatman)
