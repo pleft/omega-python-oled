@@ -32,16 +32,14 @@ def clearBuffers():
 
 
 def putPixel(x, y, value):
-    """ puts a pixel to x, y coordinates """
+    """ Puts the `value` (0 or 1) at `x`, `y` coordinates """
     global pagebuffer
     byte = (value << (y% OLED_PAGE_SIZE))
     pagebuffer[(y / OLED_PAGE_SIZE) % OLED_PAGES][x] |= byte
 
 def putRectangle(x, y, width, height, fill):
     """ 
-    Puts a rectangle (width x height) at the specified x, y coordinates.
-    Setting 'fill' to True will fill the rectangle, 
-    where False will draw just the borders 
+        Puts a rectangle (`width` x `height`) at the specified `x`, `y` coordinates. Setting `fill` to `True` will fill the rectangle, where `False` will draw just the borders
     """
 
     if fill:
@@ -58,7 +56,7 @@ def putRectangle(x, y, width, height, fill):
 
 
 def putBitmap(x, y, bitmap):
-    """ puts a bitmap MxN array of 0s and 1s to x, y coordinates """
+    """ Puts a `bitmap` MxN array of 0s and 1s to `x`, `y` coordinates """
     height = len(bitmap)
     width = len(bitmap[0])
     for i in range(width):
@@ -67,7 +65,7 @@ def putBitmap(x, y, bitmap):
 
 
 def blit():
-    """ Blits the whole framebuffer to screen at maximum fast rate """
+    """ Renders the whole `framebuffer` to screen at maximum fast rate """
     start = int(round(time.time() * 1000))
     global pagebuffer
     page = 0
@@ -87,7 +85,7 @@ def blit():
 
 def pageBlit(pageNo, x, length):
     """ 
-        Blits portion of a page (row) with 'length' starting from 'x', to screen at maximum fast rate. Does not clear the framebuffer after.
+        Renders portion of a page, (row) with `length` starting from `x`, to screen at maximum fast rate. Does not clear the `framebuffer` after.
     """
     start = int(round(time.time() * 1000))
     oledExp.setCursorByPixel(pageNo, x)
@@ -107,8 +105,7 @@ def pageBlit(pageNo, x, length):
 
 def bitmapBlit(x, y, translatedBitmap):
     """
-        Instead of filling the whole 128x64 framebuffer it blits only the region of a bitmap on the screen at 'x', 'y' location sort of DMA.
-        Does not clear the framebuffer after.
+        Instead of filling the whole 128x64 framebuffer it renders only the region of a `translatedBitmap` on the screen at `x`, `y` location, sort of Direct Memory Access (DMA). Requires the `translatedBitmap` from `translateBitmap()` as input. Does not clear the `framebuffer` after.
     """
     start = int(round(time.time() * 1000))
     bitmapHeight = len(translatedBitmap)
@@ -133,9 +130,7 @@ def bitmapBlit(x, y, translatedBitmap):
 
 def translateBitmap(bitmap):
     """
-        Converts a MxN bitmap array where each element is a bit (0 or 1), to a byte array MxL where each element is a byte (8 bits).
-        Bitmap array sizes can be: 0<M<128 and 0<N<64, and the translated bitmap will have: 0<M<128 and 0<L<8.
-        Use before calling 'bitmapBlit'.
+        Converts a MxN `bitmap` array where each element is a `bit` (0 or 1), to a `byte` array MxL where each element is a `byte` (8 `bits`). Bitmap array sizes can be: `0<M<128` and `0<N<64`, and the translated bitmap will have sizes: `0<M<128` and `0<L<8`. Useful for achieving faster rendering rates. Use before calling `bitmapBlit()`.
     """
     bitmapHeight = len(bitmap)
     bitmapWidth = len(bitmap[0])
@@ -151,7 +146,7 @@ def translateBitmap(bitmap):
 
 def scaleBitmap(bitmap, scaleX, scaleY):
     """
-        Scales down the given bitmap
+        Scales down the given `bitmap`. Each axis can scale differently by setting `scaleX`, `scaleY`. Positive integer values only
     """
     width = len(bitmap[0])
     height = len(bitmap)
@@ -159,7 +154,7 @@ def scaleBitmap(bitmap, scaleX, scaleY):
 
 def rotateBitmap90(bitmap):
     """
-        Rotates the bitmap 90 degrees
+        Rotates the `bitmap` 90 degrees
     """
     width = len(bitmap[0])
     height = len(bitmap)
@@ -171,7 +166,7 @@ def rotateBitmap90(bitmap):
 
 def rotateBitmap180(bitmap):
     """
-        Rotates the bitmap 180 degrees
+        Rotates the `bitmap` 180 degrees
     """
     width = len(bitmap[0])
     height = len(bitmap)
@@ -183,7 +178,7 @@ def rotateBitmap180(bitmap):
 
 def rotateBitmap270(bitmap):
     """
-        Rotates the bitmap 270 degrees
+        Rotates the `bitmap` 270 degrees
     """
     width = len(bitmap[0])
     height = len(bitmap)
