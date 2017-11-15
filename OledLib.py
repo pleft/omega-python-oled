@@ -141,7 +141,7 @@ def translateBitmap(bitmap):
     """
     bitmapHeight = len(bitmap)
     bitmapWidth = len(bitmap[0])
-    bitmapRows = (bitmapHeight / OLED_PAGE_SIZE) + 1
+    bitmapRows = ((bitmapHeight -1)/ OLED_PAGE_SIZE) + 1
     # print("bitmapHeight: " + str(bitmapHeight))
     # print("bitmapRows: " + str(bitmapRows))
     translation = [[0 for i in range(bitmapWidth)] for j in range(bitmapRows)]

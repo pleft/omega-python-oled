@@ -1,0 +1,17 @@
+> Initializing display
+> Writing 'Bitmap bliting size: 64x64' to display
+> Writing 'FPS: 8.38996560114' to display
+> Writing 'Bitmap bliting size: 32x32' to display
+> Writing 'FPS: 27.0965993768' to display
+> Writing 'Bitmap bliting size: 24x24' to display
+> Writing 'FPS: 41.8497593639' to display
+> Writing 'Bitmap bliting size: 16x16' to display
+> Writing 'FPS: 74.5712155108' to display
+> Writing 'Bitmap bliting size: 8x8' to display
+> Writing 'FPS: 180.342651037' to display
+> Writing 'Bitmap bliting size: 4x4' to display
+> Writing 'FPS: 204.498977505' to display
+> Writing 'Bitmap bliting size: 2x2' to display
+> Writing 'FPS: 219.538968167' to display
+> Writing 'Bitmap bliting size: 1x1' to display
+> Writing 'FPS: 226.500566251' to display
