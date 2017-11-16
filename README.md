@@ -25,6 +25,26 @@ Below is a video showcasing most features of the `OledLib` library.
 
 [![IMAGE ALT TEXT](http://img.youtube.com/vi/tv8f6IBPjpM/0.jpg)](https://www.youtube.com/watch?v=tv8f6IBPjpM "OledLib Graphics Library Demonstration")
 
+## Performance
+`OledLib` has an almost fixed rate of rendering a full screen at between `0.1` and `0.2` seconds. This yields to `5` `FPS` (frames per second). This is the outcome of the `blit()` method. Although it seems rather small, it is a huge optimization against trying to render a whole screen with `oledExp.writeByte()` method which renders at `1` `FPS`. Much higher `FPS` can be achieved using the `DMA` (Direct Memory Access) technique when rendering bitmaps. This technique is used in `bitmapBlit()` method.
+
+`bitmapBlit(x, y, translatedBitmap)` method uses the `DMA` technique and renders the exact portion of the screen that the `translatedBitmap` needs. All the rest part of the screen remains untouched. This results in very fast rates of screen refreshing since only a small part of the screen is rendered each time. For example rendering a `32x32` bitmap at various positions of the screen can be as fast as `20` `FPS`! Smaller bitmaps will achieve even higher `FPS`! A demonstration of this technique can be found in the [BatmanDemoDMA.py](https://github.com/pleft/omega-python-oled/blob/master/BatmanDemoDMA.py)
+
+### DMA Tests
+A `DMA` performance test against `bitmap` size and `FPS` count is included in [PerformanceDMADemo.py](https://github.com/pleft/omega-python-oled/blob/master/PerformanceDMADemo.py). Small bitmaps can achieve impressive refresh frame rates.
+
+| Bitmap size (in pixels) | FPS           |
+| :---------------------: | ------------: |
+| 64x64                   | 8.38996560114 |
+| 32x32                   | 27.0965993768 |
+| 24x24                   | 41.8497593639 |
+| 16x16                   | 74.5712155108 |
+| 8x8                     | 180.342651037 |
+| 4x4                     | 204.498977505 |
+| 2x2                     | 219.538968167 |
+| 1x1                     | 226.500566251 |
+
+
 ## API
 - `clearBuffers`: Clears the framebuffer (all elements to `0`).
 - `putPixel(x, y, value)`: Puts the `value` (`0` or `1`) at `x`, `y` coordinates.
