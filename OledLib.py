@@ -123,10 +123,15 @@ def bitmapBlit(x, y, translatedBitmap):
     while bitmapPage < bitmapHeight:
         # print("Bitmap page: " + str(bitmapPage))
         oledExp.setCursorByPixel(bufferPage+bitmapPage, x)
+        # bitmapWidth = bitmapWidth if OLED_WIDTH > bitmapWidth + x else OLED_WIDTH - x
         count = 0
         while count < bitmapWidth:
             lineWidth = bitmapWidth if bitmapWidth < OLED_I2C_MAX_BUFFER else (
                 OLED_I2C_MAX_BUFFER if bitmapWidth - count > OLED_I2C_MAX_BUFFER else bitmapWidth - count)
+            # lineWidth = lineWidth if lineWidth != 23 else 22 #segmentation fault when 23
+            # print(lineWidth)
+            # print(translatedBitmap[bitmapPage])
+            # print(count)
             bytes = [translatedBitmap[bitmapPage][count + i] for i in range(lineWidth)]
             i2c.writeBytes(OLED_EXP_ADDR, OLED_EXP_REG_DATA, bytes)
             count += lineWidth
